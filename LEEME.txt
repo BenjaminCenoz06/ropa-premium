@@ -1,0 +1,18 @@
+Güemes Vintage · ropa vintage, americana y de segunda mano (HTML + CSS + JS, sin dependencias externas ni build)
+
+COMO VERLA
+  Abrí una terminal en esta carpeta y corré:  python -m http.server 5193
+  Después entrá a http://localhost:5193   (agregá ?nointro para saltar la pantalla de carga)
+
+QUE EDITAR
+  js/data.js      -> TODO el contenido: datos del local, horarios, hero, paneles, opiniones y prendas
+  assets/guemes/  -> fotos tomadas del Instagram @guemesvintage
+  css/styles.css, js/app.js -> diseño y animaciones (app.js lee todo desde data.js)
+
+NOTAS
+  - Son piezas únicas y no publican precios: las prendas muestran "Consultar" y el botón abre WhatsApp con el nombre de la pieza.
+    Para mostrar precios, poné `price` en cada prenda y `noPrices: false` en data.js.
+  - Horario tomado del Instagram (lun a dom 18 a 22 h). Google Maps indica que abre a las 17 h: confirmalo.
+  - La tienda online (empretienda) figura "momentáneamente desactivada", por eso no se enlaza.
+  - Las prendas y looks se nombraron según lo que se ve en cada foto: revisalos.
+  - Todo es local: GSAP está en js/vendor/ y se usan las tipografías del sistema.

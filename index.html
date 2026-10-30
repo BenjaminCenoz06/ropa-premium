@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Güemes Vintage · Ropa vintage y americana en Córdoba</title>
+<meta name="description" content="Güemes Vintage: tienda de ropa vintage, americana y de segunda mano en Güemes, Córdoba. Piezas únicas, remeras, camisas, abrigos y pop ups con cafecito.">
+<meta name="theme-color" content="#1b1914">
+<link rel="preload" as="image" href="assets/guemes/hero-calle.webp" fetchpriority="high">
+<link rel="stylesheet" href="css/styles.css?v=rail45">
+<link rel="stylesheet" href="css/mobile.css?v=rail45">
+</head>
+<body>
+
+<!-- cortina para cambiar de página -->
+<div class="wipe" id="wipe" aria-hidden="true"></div>
+
+<header class="hdr" id="hdr">
+  <nav class="hdr__l" aria-label="Principal">
+    <a href="#/" data-nav="home">Inicio</a>
+    <a href="#/catalogo" data-nav="catalog">Catálogo</a>
+    <a href="#/contacto" data-nav="contact">Contacto</a>
+  </nav>
+  <button class="hdr__burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
+  <a class="hdr__logo" href="#/" aria-label="Güemes Vintage, inicio">GÜEMES</a>
+  <div class="hdr__r">
+    <button class="hdr__btn" id="btnSearch" aria-label="Buscar"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><span class="lbl">Buscar</span></button>
+    <button class="hdr__btn hdr__btn--hide" id="btnProfile">Perfil</button>
+    <button class="hdr__btn" id="btnCart" aria-label="Carrito"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.2 8.5h13.6l-1 11.5H6.2l-1-11.5Z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg><span class="lbl">Carrito</span><span class="hdr__count" id="cartCount" data-n="0">0</span></button>
+  </div>
+  </header>
+
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <div class="mmenu__bg" data-menu-close></div>
+  <nav class="mmenu__panel" aria-label="Menú principal">
+    <div class="mmenu__top"><a class="mmenu__logo" href="#/">GÜEMES</a><button class="mmenu__x" id="mmClose" type="button" aria-label="Cerrar menú"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <ul class="mmenu__list">
+      <li><a href="#/" data-nav="home">Inicio</a></li>
+      <li class="mmenu__has">
+        <button class="mmenu__row" id="mmCat" type="button" aria-expanded="false" aria-controls="mmSub">Catálogo<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 10 5 5 5-5"/></svg></button>
+        <ul class="mmenu__sub" id="mmSub"><li><a href="#/catalogo" data-nav="catalog">Ver todo</a></li><li><a href="#/catalogo/remeras">Remeras</a></li><li><a href="#/catalogo/abrigos-y-buzos">Abrigos y buzos</a></li><li><a href="#/catalogo/looks">Looks</a></li></ul>
+      </li>
+      <li><a href="#/contacto" data-nav="contact">Contacto</a></li>
+    </ul>
+    <div class="mmenu__act">
+      <button type="button" id="mmSearch"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>Buscar</button>
+      <button type="button" id="mmProfile"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.4 7-5.4s6.2 1.8 7 5.4"/></svg>Mi cuenta</button>
+    </div>
+    <a class="mmenu__wa" id="mmWa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.2 20.8l1.5-4.6A8.7 8.7 0 1 1 8 19.5z"/><path d="M9.2 8.6c-.3.9 0 2 .9 3.2 1 1.4 2.3 2.4 3.9 2.7.8.1 1.4-.4 1.6-1l-1.6-.9-.8.6c-.8-.4-1.7-1.2-2.1-2l.6-.8-.8-1.6c-.7 0-1.4.3-1.7 1.8z"/></svg>Escribinos por WhatsApp</a>
+    <small>Güemes Vintage · Achával Rodríguez 238<br>Lun a dom 18 a 22 h</small>
+  </nav>
+</div>
+
+<main id="app" tabindex="-1"></main>
+
+<!-- barra inferior de producto -->
+<div class="mini" id="mini" aria-hidden="true">
+  <img id="miniImg" alt="" width="40" height="40">
+  <div class="mini__t"><b id="miniName"></b><span id="miniPrice"></span></div>
+  <div class="mini__sizes" id="miniSizes" role="radiogroup" aria-label="Talle"></div>
+  <button class="btn btn--dark" id="miniAdd">Consultar</button>
+</div>
+
+<!-- carrito -->
+<div class="drawer" id="cart" role="dialog" aria-modal="true" aria-labelledby="cartH" aria-hidden="true">
+  <div class="drawer__bg" data-close></div>
+  <aside class="drawer__panel">
+    <header class="drawer__head"><h2 id="cartH">Carrito</h2><button class="x" data-close aria-label="Cerrar carrito"><i></i><i></i></button></header>
+    <div class="ship" id="shipBar"><p id="shipTxt"></p><div class="ship__bar"><i id="shipFill"></i></div></div>
+    <div class="drawer__body" id="cartBody"></div>
+    <footer class="drawer__foot">
+      <div class="drawer__tot"><span>Subtotal</span><b id="cartTot">$0</b></div>
+      <button class="btn btn--dark btn--full" id="cartSend" disabled>Finalizar compra por WhatsApp</button>
+      <p class="fine">Coordinamos el pago y el envío por WhatsApp. Consultá los medios de pago disponibles.</p>
+    </footer>
+  </aside>
+</div>
+
+<!-- búsqueda -->
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="Buscar" aria-hidden="true">
+  <div class="search__top">
+    <input id="searchInput" type="search" placeholder="Buscar prendas…" autocomplete="off" aria-label="Buscar prendas">
+    <button class="x" data-close aria-label="Cerrar búsqueda"><i></i><i></i></button>
+  </div>
+  <div class="search__res" id="searchRes"></div>
+</div>
+
+<!-- perfil -->
+<div class="drawer drawer--center" id="profile" role="dialog" aria-modal="true" aria-labelledby="profH" aria-hidden="true">
+  <div class="drawer__bg" data-close></div>
+  <div class="modal">
+    <header class="drawer__head"><h2 id="profH">Mi cuenta</h2><button class="x" data-close aria-label="Cerrar"><i></i><i></i></button></header>
+    <form class="form" id="profForm">
+      <p class="modal__p" id="profHello">Guardá tus datos para completar tus pedidos más rápido. Quedan solo en este dispositivo.</p>
+      <label><span>Nombre</span><input name="name" type="text" autocomplete="name" enterkeyhint="next" placeholder="Tu nombre"></label>
+      <label><span>Email</span><input name="email" type="email" inputmode="email" autocomplete="email" enterkeyhint="next" placeholder="tu@email.com"></label>
+      <label><span>Teléfono</span><input name="tel" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done" placeholder="+54 9 …"></label>
+      <button class="btn btn--dark btn--full" type="submit">Guardar</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/data.js?v=rail45"></script>
+<script src="js/app.js?v=rail45"></script>
+</body>
+</html>
