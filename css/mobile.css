@@ -194,3 +194,76 @@ a,button,[role=radio],.chip{-webkit-tap-highlight-color:transparent;touch-action
 .feed__head{flex-wrap:wrap;gap:14px 16px}
 .feed__head h2{min-width:0;overflow-wrap:anywhere}
 @media (max-width:420px){.feed__head .btn{max-width:100%;padding-inline:16px}}
+
+/* =====================================================================
+   Celular: más fluidez (menos filtros y blurs), todo un poco más chico, perchero más chico
+   ===================================================================== */
+@media (max-width:820px),(hover:none){
+  /* portada: sin filtros ni sombras pesadas sobre capas a pantalla completa */
+  .hscene__bg,.hscene__cut{filter:none}
+  .hscene__cut img{filter:none}
+  .hero__word{filter:drop-shadow(0 8px 12px rgba(0,0,0,.4))}
+  .hscene__tint{opacity:1}
+  /* compra: sin cuadrado de vidrio detrás de la prenda; paneles translúcidos sin blur */
+  .pd__bg .pd__glass,.pd__bg .pd__floor{display:none}
+  .pd__l,.pd__r{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.7)}
+  .pd__bg::before{filter:none}
+  .pd__imgs img[src*="assets/cut/"]{filter:drop-shadow(0 16px 14px rgba(40,50,110,.26))}
+  /* perchero: sin brillo enmascarado ni escalado, sombra más simple */
+  .hg__shine{display:none}
+  .hg__cut{filter:drop-shadow(0 10px 9px rgba(50,35,45,.22))}
+  .card__media.is-cut img{filter:drop-shadow(0 10px 9px rgba(50,35,45,.2))}
+  .split__item img{filter:drop-shadow(0 12px 12px rgba(0,0,0,.16))}
+}
+
+@media (max-width:820px){
+  :root{--pad:14px}
+  .hdr__logo{font-size:20px}
+
+  /* perchero más chico: se ven más prendas a la vez */
+  .rail{--cw:clamp(100px,33vw,150px);--gap:clamp(10px,3.4vw,22px);padding-top:clamp(64px,10vh,90px);padding-bottom:clamp(54px,8vh,80px)}
+  .rail__arc{height:clamp(24px,5vw,40px)}
+  .rail{--sag:clamp(24px,5vw,40px)}
+  .rail__pin{display:none}
+  .rail__p{margin-top:clamp(8px,2vh,18px)}
+  .rail__p p{font-size:13.5px}
+  .rail__p a{padding:11px 22px 10px;font-size:10.5px}
+  .rail__foot{font-size:11px}
+
+  /* tarjetas y secciones más compactas */
+  .grid3 .card__media,.card__media{aspect-ratio:1/1.1}
+  .grid4,.grid3{gap:18px 10px}
+  .card__cap{padding-top:10px;font-size:10.5px}
+  .card__tag{font-size:8.5px;padding:4px 6px 3px}
+  .cat__h h1,.contact h1{font-size:clamp(40px,12.5vw,66px)}
+  .page{padding-top:clamp(84px,13vh,120px)}
+  .shelf__head .label,.shelf__head .link{font-size:11px}
+  .rev{padding:clamp(40px,7vh,64px) var(--pad);gap:26px}
+  .rev__score b{font-size:clamp(54px,16vw,78px)}
+  .rev__q blockquote{font-size:clamp(16px,4.7vw,21px)}
+  .rev__chips li{padding:8px 12px 7px;font-size:11px}
+  .visit__txt{padding:clamp(28px,6vh,54px) var(--pad)}
+  .visit h2{font-size:clamp(28px,8.4vw,42px)}
+  .visit p{font-size:13.5px}
+  .visit__img{min-height:38vh}
+  .perks div{padding:18px 0}
+  .perks b{font-size:14px}
+  .perks span{font-size:12px}
+  .marq__t span{font-size:clamp(34px,10vw,58px)}
+  .feed{padding-top:clamp(28px,5vh,56px);padding-bottom:clamp(40px,7vh,80px)}
+  .btn{font-size:11.5px}
+  .ft__t{font-size:clamp(26px,8vw,38px)}
+  .ft__cols li{font-size:11.5px}
+  .pd__t{font-size:19px}
+  .pd__price{font-size:19px}
+}
+@media (max-width:520px){
+  .rail{--cw:clamp(98px,31vw,128px)}
+}
+
+/* celular: las fichas del perchero no calculan blur mientras están ocultas; perchas sin sombra filtrada */
+@media (max-width:820px),(hover:none){
+  .hg__tag{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.94);visibility:hidden}
+  .hg__card.is-flip .hg__tag{visibility:visible}
+  .hg__hanger{filter:none}
+}

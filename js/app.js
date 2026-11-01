@@ -308,7 +308,8 @@
   function initRail() {
     var sec = $('#rail'), viewEl = $('#railView'), track = $('#railTrack'); if (!sec || !viewEl) return;
     var hgs = $$('.hg', track), half = 0, x = 0, px = 0, pvx = 0, drag = false, lastX = 0, vel = 0, extra = 0, inView = false, hover = 0, slow = 1, moved = 0;
-    var sw = hgs.map(function (el, i) { return { el: el.querySelector('.hg__sway'), a: 0, v: 0, k: 44 + (i * 7) % 24, ph: i * 1.7 }; });
+    var small = matchMedia('(max-width:820px)').matches;   // celular: prendas más chicas, más balanceo y sin escalado (más fluido)
+    var sw = hgs.map(function (el, i) { return { el: el.querySelector('.hg__sway'), a: 0, v: 0, k: (small ? 30 + (i * 5) % 16 : 44 + (i * 7) % 24), ph: i * 1.7 }; });
     var calc = function () { half = track.scrollWidth / 2; }; calc();
     var ro = new ResizeObserver(calc); ro.observe(track); onClean(function () { ro.disconnect(); });
     var io = new IntersectionObserver(function (e) { inView = e[0].isIntersecting; }); io.observe(sec); onClean(function () { io.disconnect(); });
@@ -337,18 +338,18 @@
       if (!inView || !half || !dt) return;
       extra *= Math.pow(.03, dt);
       slow += ((hover ? .1 : 1) - slow) * (1 - Math.exp(-dt * 5));
-      if (!drag) { x -= ((reduce ? 0 : 34) * slow + extra) * dt + vel * dt; vel *= Math.pow(.04, dt); }
+      if (!drag) { x -= ((reduce ? 0 : (small ? 44 : 34)) * slow + extra) * dt + vel * dt; vel *= Math.pow(.04, dt); }
       if (x <= -half) x += half; if (x > 0) x -= half;
       track.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0)';
       var vx = (x - px) / dt; px = x;
       if (Math.abs(vx) > half) vx = pvx; pvx = vx;
-      var lean = clamp(vx * .011, -16, 16), t = now / 1000;
+      var lean = small ? clamp(vx * .017, -24, 24) : clamp(vx * .011, -16, 16), t = now / 1000;
       var vw = viewEl.clientWidth, cw = hgs[0].offsetWidth, sag = arc ? arc.getBoundingClientRect().height : 0;
       for (var i = 0; i < sw.length; i++) {
-        var s = sw[i], tgt = lean + (reduce ? 0 : Math.sin(t * 1.15 + s.ph) * 1.1);
-        s.v += ((tgt - s.a) * s.k - s.v * 2.6) * dt; s.a += s.v * dt;
+        var s = sw[i], tgt = lean + (reduce ? 0 : Math.sin(t * 1.15 + s.ph) * (small ? 3 : 1.1));
+        s.v += ((tgt - s.a) * s.k - s.v * (small ? 1.7 : 2.6)) * dt; s.a += s.v * dt;
         /* la prenda que pasa por el centro del riel se agranda, como la pieza destacada */
-        var d = Math.abs(hgs[i].offsetLeft + cw / 2 + x - vw / 2) / (vw * .5), sc = 1 + .16 * Math.max(0, 1 - d * 1.6);
+        var d = Math.abs(hgs[i].offsetLeft + cw / 2 + x - vw / 2) / (vw * .5), sc = small ? 1 : 1 + .16 * Math.max(0, 1 - d * 1.6);
         var u = (hgs[i].offsetLeft + cw / 2 + x - vw / 2) / (vw * .5), oy = sag * Math.max(0, 1 - u * u);   // la percha sigue la curva del riel
         s.el.style.transform = 'translateY(' + oy.toFixed(1) + 'px) rotate(' + s.a.toFixed(2) + 'deg) scale(' + sc.toFixed(3) + ')';
       }
@@ -519,7 +520,7 @@
 
     /* al bajar por el hero la foto va tomando color (la variable --tone va de 0 a 1) */
     var scene = $('#hscene');
-    if (scene) {
+    if (scene && !matchMedia('(max-width:820px)').matches) {   // en celular no se anima el color (filtros pesados)
       var tone = ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: 'bottom 25%', onUpdate: function (s) { scene.style.setProperty('--tone', clamp(s.progress, 0, 1).toFixed(3)); } });
       onClean(function () { tone.kill(); });
     }
