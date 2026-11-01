@@ -761,7 +761,7 @@
   function productHTML(p) {
     var n = p.gallery.length, rel = P.filter(function (x) { return x.id !== p.id && x.cat === p.cat; }).concat(P.filter(function (x) { return x.id !== p.id && x.cat !== p.cat; })).slice(0, 4);
     var cuota = fmt(p.price / S.installments);
-    return '<section class="pd" id="pd" style="height:calc(var(--h) * ' + (1 + (n - 1) * .9) + ')">' +
+    return '<section class="pd" id="pd" data-n="' + n + '" style="height:calc(var(--h) * ' + (1 + (n - 1) * .9) + ')">' +
       '<div class="pd__stage" id="pdStage"><div class="pd__bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pd__glass"></i><i class="pd__floor"></i></div><div class="pd__imgs" id="pdImgs">' + p.gallery.map(function (s, i) { return '<img src="' + s + '" alt="' + p.name + ' · vista ' + (i + 1) + '" decoding="async"' + (i === 0 ? ' fetchpriority="high"' : '') + '>'; }).join('') + '</div>' +
       '<div class="pd__l"><a class="pd__back" href="#/catalogo"><svg viewBox="0 0 8 8"><path d="M5.5 1 2.5 4l3 3"/></svg> Volver</a>' +
       '<h1 class="pd__t">' + p.name + '</h1><p class="pd__d">' + p.desc + '</p><ul class="pd__spec">' + p.specs.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul></div>' +
